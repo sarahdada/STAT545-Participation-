@@ -48,14 +48,14 @@ select(gapminder, year, lifeExp, country)
 select(gapminder, country, continent, year, lifeExp)
 
 # Better way:
-select(gapminder, lifeExp)
+select(gapminder, country:lifeExp)
 ```
 
 
 3. Select all variables, except `lifeExp`.
 
 ```{r}
-select(gapminder, FILL_THIS_IN)
+select(gapminder, country:lifeExp)
 ```
 
 4. Put `continent` first. Hint: use the `everything()` function.
@@ -115,6 +115,9 @@ Now using with pipes:
 ```{r}
 # alter the below to include 2 "pipes"
 arrange(select(gapminder, year, lifeExp, country), year, lifeExp)
+gapminder %>%
+  select(year, lifeExp,country) %>% # this line selects columns year..
+  arrange(year,lifeExp)
 ```
 
 # Resume lecture 
