@@ -80,19 +80,19 @@ rename(gapminder, FILL_THIS_IN)
 1. Order by year.
 
 ```{r}
-arrange(gapminder, FILL_THIS_IN)
+arrange(gapminder, lifeExp)
 ```
 
 2. Order by year, in descending order.
 
 ```{r}
-arrange(gapminder, FILL_THIS_IN)
+arrange(gapminder, desc(lifeExp))
 ```
 
 3. Order by year, then by life expectancy.
 
 ```{r}
-arrange(gapminder, FILL_THIS_IN, FILL_THIS_IN)
+arrange(gapminder, year, lifeExp)
 ```
 
 ## Piping, `%>%` (8 min)
