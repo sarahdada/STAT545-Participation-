@@ -174,8 +174,13 @@ Let's get:
 ```{r}
 gapminder %>%
   mutate(gdpBill=gdpPercap*pop/1000000000000)
+i dont know then i added round it sucked
+gapminder %>%
+  mutate(gdpBill=round(gdpPercap*pop/1000000000000),digits=2)
 
-#use mutate, why not assign column.
+#use mutate, why not assign column. this is the only way to make a new column
+#round to reduce decimal places.
+#if i wanted to store it, would need <- and assign it in a new name for it to be in you r workplace to manipulate further
 ```
 
 Notice the backwards compatibility! No need for loops!
@@ -184,7 +189,8 @@ Try the same thing, but with `transmute` (drops all other variables).
 
 ```{r}
 gapminder %>%
-  transmute(FILL_THIS_IN)
+  transmute((gdpBill=gdpPercap*pop/1000000000000)
+#mutate and then select is what it is doing.
 ```
 
 The `if_else` function is useful for changing certain elements in a data frame.
@@ -193,12 +199,13 @@ Example: Suppose Canada's 1952 life expectancy was mistakenly entered as 68.8 in
 
 ```{r}
 gapminder %>%
-  mutate(FILL_THIS_IN)
+  mutate(lifeExp= if_else(country == 'Canada' &year == 1972, 70, lifeExp))
 ```
 
 Your turn: Make a new column called `cc` that pastes the country name followed by the continent, separated by a comma. (Hint: use the `paste` function with the `sep=", "` argument).
 
 ```{r}
+mutate (gapminder) sep
 ```
 
 These functions we've seen are called __vectorized functions__.
