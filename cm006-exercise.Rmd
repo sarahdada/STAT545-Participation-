@@ -118,6 +118,9 @@ arrange(select(gapminder, year, lifeExp, country), year, lifeExp)
 gapminder %>%
   select(year, lifeExp,country) %>% # this line selects columns year..
   arrange(year,lifeExp)
+# %>%  command shift m is shorcut to pipeline
+#if you want to store, you will have to make it a new frame. but if you wanted to store, wuold just call it gapminder, and it would overwrite.
+#vectors will add, if one is longer than other, itll loop. vector of true or falses. 
 ```
 
 # Resume lecture 
@@ -130,25 +133,39 @@ Return to guide at section 6.7.
 
 ```{r}
 gapminder %>%
-  filter(FILL_THIS_IN)
+  filter(pop>100000000)
 ```
 
 2. Your turn: of those rows filtered from step 1., only take data from Asia.
 
 ```{r}
+
 gapminder %>%
-  filter(FILL_THIS_IN)
+  filter(pop>100000000, continent == 'Asia')
+
+gapminder %>%
+  filter(pop>100000000)%>%
+  filter(cont=='asia')
+
+gapminder %>%
+  filter(pop>100000000 & cont=='asia')
+
+
+#select takes columns, filter does rows.
 ```
 
 3. Repeat 2, but take data from countries Brazil, and China. 
 
 ```{r}
 gapminder %>%
-  filter(FILL_THIS_IN)
+  filter(country == 'Brazil' | country ==)
+
+#use filter mutate and something the most
+
 ```
 
-## `mutate()` (10 min)
-
+## `mutate(gdpBill = =gdpPercap*pop)` (10 min)
+#what youre going to name it is on left
 Let's get: 
 
 - GDP by multiplying GPD per capita with population, and
@@ -156,7 +173,9 @@ Let's get:
 
 ```{r}
 gapminder %>%
-  mutate(FILL_THIS_IN)
+  mutate(gdpBill=gdpPercap*pop/1000000000000)
+
+#use mutate, why not assign column.
 ```
 
 Notice the backwards compatibility! No need for loops!
