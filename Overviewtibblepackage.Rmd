@@ -1,0 +1,65 @@
+---
+title: "Overviewtibblepackage"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+summarize, take a vector and crunch it down to a single number. Mu, sigma. Mean life expectancy.
+Datafram, compress down to a single row. 
+summarize gapminder,  mu, sigma. new column mu, right hand is calcularition. how does it know what 
+within the summarize function theres a new environment, gapminder data frame. how does int know lifeExp, if it does not know object.
+vector labelled life exp.
+mutate adds the column to the tibble
+summarize got rid of all the columns except what we are looking at. by necessity there must be one value. gets rid of all of the rows. 
+group_by function, 
+group by, all rows by asia in 56 is one group, all rows in group have a year 1957
+cant group a data frame 
+group_by doesnt resort your label.
+what is difference between group by and arrange
+kind of like mutate small lifeexp=lifeExp<60
+added an arrange just to be safe. earlier years first, later years last.
+
+drop na in tidry, takes a tibble and drops na.
+
+still dont
+these all take in a tibble and return a tibble
+what is purpose of group by, dont understand benefit of breaking it into chunks, why not arrange
+
+WE ARE ON MDY FUNCTION, LUBRIDATE YMD, sorts dates.
+
+lubridate, we can extract information.
+day function, 24
+but lubridate package fell short. doesnt let you make a year month object. tsibble package does allow you. extract year month, particular date, year mont h.
+can get rid of na, so if you do the lag then there is not going to give you the wrong answer. 
+if you want to group by a time inder instead of group by you use index by.
+
+
+______
+
+Sep 26 
+
+Both are useful for 1 variable
+Jitter plot, would ou have to group ahead of time? No, you don’t , it already splits different continents into different bins on the x ais.
+
+Can you add an if statement to ggplot, if you only want to see the plot corresponding to 
+Boplot, median is there. 
+Where 50% of the variation lives with it. Box and whisker plot as well
+whenever you have the opportunity to show raw data, then you should. you dont know how many observations there are.
+
+priduces a density plot and stcks them in front of each  other- geom gg ridges. very powerful pot. this is when not quantitative, relative spread and where bulk of density is lying. you ahve to load the ggridges. geom_rod, theres like a little bar wherever there is an observation.
+violin plot as well, and its like ridgeplot on its side, 90 degrees turned, and hills symmetrival.
+
+geom_bar, geom_col
+important to know the differenc.
+heights of bar, heights of col.
+geom bar calculates what goes on y axis for us. 
+
+geom line, tak a scatterplot of your data, and connect the dots from left to right. here it is grouping for every single year, applies geom _likne to every group, which is year. parsing of times adn dates. 
+
+what is lubridate
+geom path connects the dots in the order they appear in the dataframe
+
+
