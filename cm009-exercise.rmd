@@ -19,6 +19,41 @@ email <- read_csv("https://raw.githubusercontent.com/STAT545-UBC/Classroom/maste
 knitr::opts_chunk$set(error = TRUE, warning = FALSE)
 ```
 
+Tibble function, specify names
+
+Create a name column. and then 
+if you are using base r, 
+can use trubble function to manually specify. 
+list_col tibble. 
+expand and explore grid-all combination of variables. all combinations of x =1-2, y=1-2. 
+nesting if you dont want x and y lumped together. 
+go through implicit NAs on your own. time series tibble where you go through missing date. same idea here. 
+
+Untidy example 1
+
+if tidy format, if different types, all you have to do is group by hair, and then summarize by eyes here. Example 2 , same thing. switched eye and hair color. there are wider. there are more columns as untidy, and there are less rows. untidy lots of columns, but fewer rows. need to reverse this, put it in different format. data that is too wide is not always issue. example data too long, and also untidy, because observations are split into two rows. going to need to group, and then do some spreading. each unique part of body part has a variable, so it should be in its own column, because it is a variable.
+
+does red hair ever occur with blue eyes. 
+can filter(hair == "red", eye=="blue")
+
+there isnt such thing as wide format and long format. you can only prepare two formats, and say table one is longer than table two, or table one is wider than table two.
+
+each variable is contained within a single column. what we want to do is take all of these variables and put them into one column
+9.2., pivoting tools. pivot wider or pivot takes tibble and makes it either wider or longer.
+
+reshaped package. reshape 2 package. actually pretty convenient to use gather and spread. terminology, gives you a lot more flexibility for widening or funcitonin. its not like the gather and spread functions are going away, just not actively___ not sure. 
+
+what the fuck is gather and spread.
+pivoting- multivariate pivoting.
+eye color as columns, and we need to move this into a single column. need to take the titles, column names. these are actually values of an observation, so i need to take those into a single row. then i need to take whats underneath, and put those in a single row.
+
+one column names, another column , calues. so names are now in "eye column" and values are in the n column.
+
+pivoting-pivot longer to take the wide format and make it longer. takes a tibble and returns a tibble. besides the first argument that .... the tibble . we have to specify which columns are we working with . so we want all of the eye colour column. thats enough . optional and highly recommended are name to and values_to argument. the names are going to its own column. what do you want that column name to be . and then values too. the values that will be in ___ columns. taking the tidy data, making it longer. saying you want all of these columns green_eye, brown_eye,  and then specify that you want the names to be specified "eye".
+
+I actually cant think of an example where you have two columns and make it wider. maybe if you had eye color and age. 
+if there are 29 blue hair black eye peopl....we have list columns. tibbles with list columns. if you look at column blue. you have basically a list.
+
 ## Exercise 1: Univariate Pivoting
 
 Consider the Lord of the Rings data:
@@ -94,17 +129,19 @@ FILL_THIS_IN %>%
 
 ```{r}
 guest_long %>% 
-  pivot_wider(id_cols     = FILL_THIS_IN, 
-              names_from  = FILL_THIS_IN, 
+  pivot_wider(id_cols     = c(party,name), 
+              names_from  = event, 
               names_sep   = "_", 
-              values_from = FILL_THIS_IN)
+              values_from = (meal,attendance))
 ```
 
 6. You also have a list of emails for each party, in this worksheet under the variable `email`. Change this so that each person gets their own row. Use `tidyr::separate_rows()`
+each row of guest column is just a bunch of names seperated by columns. each party has their own email.
+seperate rows, comma space
 
 ```{r}
 email %>% 
-  separate_rows(FILL_THIS_IN, sep = FILL_THIS_IN)
+  separate_rows(guest, sep = ", ")
 ```
 
 
