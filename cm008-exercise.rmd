@@ -216,6 +216,18 @@ gapminder %>%
   ggplot(aes(country, lifeExp)) + 
   geom_point() +
   geom_boxplot()
+
+gapminder %>% 
+  filter(continent == "Americas") %>% 
+  ggplot(aes(country, lifeExp)) + 
+  ggridges::geom_density_ridges()
+
+#upset because it was vertical, want to change the order of x and y because "missing aes"
+
+gapminder %>% 
+  filter(continent == "Americas") %>% 
+  ggplot(aes(lifeExp,country)) + 
+  ggridges::geom_density_ridges()
 ```
 
 ## Exercise 6: Bar plot madness
