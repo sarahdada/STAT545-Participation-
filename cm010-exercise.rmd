@@ -47,6 +47,15 @@ semi-join is basically just an inner join except you’re not keeping the column
 
 if you have a data frame that has a tibble, you dont need to make into a tibble before using join function.
 
+A=abc
+B=abd
+intersect, will take everything in common{ab}
+union-will take all elements that appear in either of them. {a,b,c,d}
+Set diff, A-B. starting with set A, elements are kept that dont appear in b {c}
+set diff B-A woiudl be d left.
+
+Bind_rows() and bind_cols
+
 The package `singer` comes with two smallish data frames about songs. Let's take a look at them (after minor modifications by renaming and shuffling):
 
 ```{r}
@@ -63,39 +72,58 @@ The package `singer` comes with two smallish data frames about songs. Let's take
 
 
 1. We really care about the songs in `time`. But, which of those songs do we know its corresponding album?
+for outer join we have left, righ, and (another ) join. these are mutating joins 9new row)
+we want a filtering join. we like the time table. which of those do we have information about album and city
+outer join.  filtering, semi join
+each song will indentify bu observation
+if two artists make same song name, would need to do by both song and artist
+
+if we wanted to do same thing but display city and album info- mutate- inner join maybe
 
 ```{r}
 time %>% 
-  FILL_THIS_IN(album, by = FILL_THIS_IN)
+  semi_join(album, by ="song", "artist_name")
+
+time %>% inner_join by= c("song","artist_name") missed this
+
+time %>% 
+  semi_join(album, by ="song", "artist_name")
 ```
 
 2. Go ahead and add the corresponding albums to the `time` tibble, being sure to preserve rows even if album info is not readily available.
+left join preserve everything from base, and add if available (so doesnt throw away, does na)
 
 ```{r}
 time %>% 
-  FILL_THIS_IN(album, by = FILL_THIS_IN)
+  left_join(album, by=c("song","artist_name"))
 ```
 
 3. Which songs do we have "year", but not album info?
+all that appear in time, but not in album.
 
 ```{r}
 time %>% 
-  FILL_THIS_IN(album, by = "song")
+  semi_joinN(album, by = "song")
 ```
 
 4. Which artists are in `time`, but not in `album`?
+subtract out 
+we are gonna see what is in time that is not in album. identify by artist name.
 
 ```{r}
 time %>% 
-  anti_join(album, by = "FILL_THIS_IN")
+  anti_join(album, by = "artist_name")
 ```
 
 
 5. You've come across these two tibbles, and just wish all the info was available in one tibble. What would you do?
-
+because you are not saying artist name is same, we will split from x y. doesnt know corduroy city and artist so confused. so add artist name
 ```{r}
-FILL_THIS_IN %>% 
-  FILL_THIS_IN(FILL_THIS_IN, by = "song")
+time %>% 
+  full_join(album, by = "song")
+
+time %>% 
+  full_join(album, by = c("song","artist_name"))
 ```
 
 
@@ -112,18 +140,17 @@ retk <- read_csv("https://raw.githubusercontent.com/jennybc/lotr-tidy/master/dat
 1. Combine these into a single tibble.
 
 ```{r}
-FILL_THIS_IN(fell, FILL_THIS_IN)
+bind_rows(fell, ttow, retk)
 ```
 
 2. Which races are present in "The Fellowship of the Ring" (`fell`), but not in any of the other ones?
-
+by is the column that indicates the observation
+get 0 rows again. even if first antijoin get rids of everything what isf you get more data. code is not so robust then.
 ```{r}
 fell %>% 
   anti_join(ttow, by = "Race") %>% 
-  FILL_THIS_IN(FILL_THIS_IN, by = "Race")
+  anti_join(retk, by = "Race")
 ```
-
-
 
 ## Exercise 3: Set Operations
 
@@ -138,22 +165,32 @@ Let's use three set functions: `intersect`, `union` and `setdiff`. We'll work wi
 ```
 
 1. Rows that appear in both `y` and `z`
+trying inner join as well, it also works.
+might have written innner join wrong
 
 ```{r}
-FILL_THIS_IN(y, z)
+intersect(y, z)
+inner_join(y,z)
 ```
 
 2. You collected the data in `y` on Day 1, and `z` in Day 2. Make a data set to reflect that.
+he would prefer bind rows. two tibbles, dont want option of removing rows, if sasme data on day 1 and day 2, and then it is not removed
 
 ```{r}
-FILL_THIS_IN(
+union(
+  mutate(y, day = "Day 1"),
+  mutate(z, day = "Day 2")
+)
+
+bind_rows(
   mutate(y, day = "Day 1"),
   mutate(z, day = "Day 2")
 )
 ```
 
 3. The rows contained in `z` are bad! Remove those rows from `y`.
-
+antijoin also works, because same columns, if same columns in z and y we would have to use
 ```{r}
-FILL_THIS_IN(FILL_THIS_IN, FILL_THIS_IN)
+setdiff(y, z)
+anti_join(y,z)
 ```

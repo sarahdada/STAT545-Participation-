@@ -34,6 +34,9 @@ knitr::opts_chunk$set(error = TRUE, warning = FALSE)
 After fixing the error, fix the overlapping problem in the following plot (attribution: ["R for data science"](https://r4ds.had.co.nz/data-visualisation.html)).
 
 whenever youre working with ggplot, always +, geom jitter seperates points a bit, smooth makes line of best fit, linesar regression line. it is fitting it to originla points, not geom jitter. geom jitter doesnt actually change the actual data. geom smooth is using city of linear data the main data.
+
+
+
 ```{r, fig.width = 5, fig.height = 2}
 ggplot(mpg, aes(cty, hwy)) +
   geom_point() +
