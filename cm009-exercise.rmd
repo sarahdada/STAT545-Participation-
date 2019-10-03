@@ -54,6 +54,12 @@ pivoting-pivot longer to take the wide format and make it longer. takes a tibble
 I actually cant think of an example where you have two columns and make it wider. maybe if you had eye color and age. 
 if there are 29 blue hair black eye peopl....we have list columns. tibbles with list columns. if you look at column blue. you have basically a list.
 
+here, in specifying the columns, instead of - looked at the column to the left, and the column to right. still not entirely robust. tidy select- contain. contain eye. all of the columns i want to work with have the word iye in it
+
+or all columns without hair, so all columns minus hair. that is lengthening. 
+
+hair is going to be the identifyer. name scrub-names of the new column, which column is it coming vrom . and then values. so something needs to come underneath the values.
+
 ## Exercise 1: Univariate Pivoting
 
 Consider the Lord of the Rings data:
@@ -62,27 +68,29 @@ Consider the Lord of the Rings data:
 lotr
 ```
 
-1. Would you say this data is in tidy format?
+1. Would you say this data is in tidy format? relative
 
 2. Widen the data so that we see the words spoken by each race, by putting race as its own column.
 
 ```{r}
 (lotr_wide <- lotr %>% 
-  pivot_wider(FILL_THIS_IN = c(-Race, -Words), 
-              FILL_THIS_IN = Race, 
-              FILL_THIS_IN = Words))
+  pivot_wider(id_cols = c(-Race, -Words), 
+              names_from = "Race", 
+              values_from = "Words")
 ```
 
 3. Re-lengthen the wide LOTR data from Question 2 above.
 
 ```{r}
 lotr_wide %>% 
-  pivot_longer(FILL_THIS_IN = FILL_THIS_IN, 
-               names_to  = FILL_THIS_IN, 
-               values_to = FILL_THIS_IN)
+  pivot_longer(cols = c(-Film, -Gender), 
+               names_to  = "Race", 
+               values_to = "Words")
 ```
 
 ## Exercise 2: Multivariate Pivoting
+
+9.4
 
 Congratulations, you're getting married! In addition to the wedding, you've decided to hold two other events: a day-of brunch and a day-before round of golf.  You've made a guestlist of attendance so far, along with food preference for the food events (wedding and brunch).
 
