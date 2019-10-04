@@ -18,6 +18,8 @@ email <- read_csv("https://raw.githubusercontent.com/STAT545-UBC/Classroom/maste
 ```{r allow errors, echo = FALSE}
 knitr::opts_chunk$set(error = TRUE, warning = FALSE)
 ```
+Start
+
 
 Tibble function, specify names
 
@@ -60,6 +62,10 @@ or all columns without hair, so all columns minus hair. that is lengthening.
 
 hair is going to be the identifyer. name scrub-names of the new column, which column is it coming vrom . and then values. so something needs to come underneath the values.
 
+Pivot. 
+ if you put.value it just leaves that column. will have a limit.
+ 
+ taking one column, making it two columns, seperating by
 ## Exercise 1: Univariate Pivoting
 
 Consider the Lord of the Rings data:
@@ -100,36 +106,45 @@ guest %>%
 ```
 
 1. Put "meal" and "attendance" as their own columns, with the events living in a new column.
+underscore is seperating the left from the right
 
+- party - name. just wanting to specify what you want. easier to just say i want all the columns except for party and name.
+THINGS ON THE LEFT, OWn column, and thing on right own column, so wedding ,  brunch vs __
 ```{r}
 (guest_long <- guest %>% 
-  pivot_longer(cols      = FILL_THIS_IN, 
-               names_to  = FILL_THIS_IN,
-               FILL_THIS_IN))
+  pivot_longer(cols      = c(-party,-name), 
+               names_to  = c("values","event"),
+               names_sep="_"))
 ```
+filter things called seperate . seperate whatever column you want. name into two new columns.
 
 2. Use `tidyr::separate()` to split the name into two columns: "first" and "last". Then, re-unite them with `tidyr::unite()`.
 
 ```{r}
 guest_long %>% 
-  separate(FILL_THIS_IN, into = FILL_THIS_IN)
-  # unite(col = "name", FILL_THIS_IN, sep = FILL_THIS_IN)
+  separate(name ,into = c("first","last")), sep=" ")%>% 
+  unite(col = "name", first, last, sep = " ")
 ```
 
 3. Which parties still have a "PENDING" status for all members and all events?
+after grouping party
+
+use the gues long here
 
 ```{r}
-FILL_THIS_IN %>% 
+guest_long %>% 
   group_by(party) %>% 
   summarize(all_pending = all(attendance == "PENDING"))
 ```
 
 4. Which parties still have a "PENDING" status for all members for the wedding?
 
+put in the original tibble
+
 ```{r}
-FILL_THIS_IN %>% 
+guest %>% 
   group_by(party) %>% 
-  summarize(pending_wedding = all(FILL_THIS_IN == "PENDING"))
+  summarize(pending_wedding = all(attendance_wedding == "PENDING"))
 ```
 
 
@@ -137,10 +152,10 @@ FILL_THIS_IN %>%
 
 ```{r}
 guest_long %>% 
-  pivot_wider(id_cols     = c(party,name), 
-              names_from  = event, 
+  pivot_wider(id_cols     = c(party, name), 
+              names_from  = c(event, meal), 
               names_sep   = "_", 
-              values_from = (meal,attendance))
+              values_from = c(meal,attendance))
 ```
 
 6. You also have a list of emails for each party, in this worksheet under the variable `email`. Change this so that each person gets their own row. Use `tidyr::separate_rows()`
@@ -203,5 +218,6 @@ experiment %>% complete(name, trt, rep)
 
 experiment %>% complete(nesting(name, trt), rep)
 ```
+
 
 
