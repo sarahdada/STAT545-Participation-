@@ -11,7 +11,11 @@ knitr::opts_chunk$set(error = TRUE)
 ```
 
 ## Motivating the need for factors in R
+factors allows you to sort data by value , or allows alphabetical order
+factor -when you 
+can sort by mean, etcs
 
+otehrwise would have to wrangle, manually specifiy, rearrange data frame, and manualy specifu
 ### Activity 1: Using Factors for plotting 
 
 **1.1** Let's look again into `gapminder` dataset and create a new cloumn, `life_level`, that contains five categories ("very high", "high","moderate", "low" and "very low") based on life expectancy in 1997. Assign categories accoring to the table below:
