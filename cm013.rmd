@@ -32,7 +32,7 @@ Write some notes here about what "effective visualizations" means to you. Think 
 1. Points not very close together/ easy to visualize seperately
 1. Axis clearly labelled, a clear legend
 1. Demonstrating the most relevant data (time periods  with changes, not just all time.)
-1. Shows significant points
+1. Shows significant points (on bar graphs)
 1.Use of color differences where possible
 
 ### CQ01: Weekly hours for full-time employees
@@ -77,11 +77,11 @@ Great resource for selecting the right plot: https://www.data-to-viz.com/ ; enco
 
 We will be filling these principles in together as a class
 
+1. Use the correct x axis (dont always start at 0)
 1. 
 1. 
-1. 
-1. 
-1. 
+1. Use the corrext y axis
+1. Use the corrext colors (dont inverse colors?)
 
 ### Make a great plot worse
 
@@ -91,9 +91,46 @@ How many of the principles did you manage to break?
 
 ## Plotly demo [10 mins]
 
-Did you know that you can make interactive graphs and plots in R using the plotly library? We will show you a demo of what plotly is and why it's useful, and then you can try converting a static ggplot graph into an interactive plotly graph.
+Did you know that you can make interactive graphs and plots in R using tlhe plotly library? We will show you a demo of what plotly is and why it's useful, and then you can try converting a static ggplot graph into an interactive plotly graph.
 
 This is a preview of what we'll be doing in STAT 547 - making dynamic and interactive dashboards using R!
+```{r}
+install.packages("plotly")
+```
+
+```{r}
+library(tidyverse)
+library(gapminder)
+library(plotly)
+```
+
+
+```{r}
+p<-ggplot (gapminder,aes(x=gdpPercap, y=lifeExp, color=continent))
++geom_point() 
+#make interactive 
+p %>% ggplotly()
+#plot_ly syntax
+
+gapminder %>% 
+  plot_ly(x=~gdpPercap,
+          y=~lifeExp,
+          color=~continent,
+          type='scatter',
+          mode='markers')
+
+#this only works for html, wont work in markdown documents
+#function to conver ggplot graph is ggplotly
+
+#sign up plotly , sign up 
+sys.sentenv ("plotly_username"="wvictor14")
+sys.setenv("plotly_api_key")=
+
+  #api key and user name when you sign up
+  
+api_create  
+```
+
 
 ## Supplemental worksheet (Optional)
 
