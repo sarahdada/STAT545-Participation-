@@ -129,6 +129,9 @@ sys.setenv("plotly_api_key")=
   #api key and user name when you sign up
   
 api_create  
+data to viz.com
+
+case studies.
 ```
 
 #remove the redundant axis.dont want too many words.
