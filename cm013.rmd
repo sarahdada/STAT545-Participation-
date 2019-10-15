@@ -131,6 +131,16 @@ sys.setenv("plotly_api_key")=
 api_create  
 ```
 
+#remove the redundant axis.dont want too many words.
+tightening lines, removing corners, 
+could get rid of the lines.
+remove to improve
+remove special affects, shadowing is bad
+bolding
+direct label
+lighten color.
+
+Overplotting-common issue in dataviz. the dots of your scatterplot.
 
 ## Supplemental worksheet (Optional)
 
