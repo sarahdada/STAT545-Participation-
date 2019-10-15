@@ -9,6 +9,13 @@ output:
 ```{r allow errors, echo = FALSE}
 knitr::opts_chunk$set(error = TRUE)
 ```
+```{r}
+library(gapminder)
+library(tidyverse)
+library(dplyr)
+library(forcats)
+library(ggplot2)
+```
 
 ## Motivating the need for factors in R
 factors allows you to sort data by value , or allows alphabetical order
@@ -32,13 +39,13 @@ Function `case_when()` is a tidier way to vectorise multiple `if_else()` stateme
 
 ```{r}
 gapminder %>% 
-  filter(year == FILL_IN_THIS) %>% 
-  mutate(life_level = case_when(lifeExp < FILL_IN_THIS ~ FILL_IN_THIS,
-                                lifeExp < FILL_IN_THIS ~ FILL_IN_THIS,
-                                lifeExp < FILL_IN_THIS ~ FILL_IN_THIS,
-                                lifeExp < FILL_IN_THIS ~ FILL_IN_THIS,
-                                TRUE ~ FILL_IN_THIS)) %>% 
-  ggplot() + geom_boxplot(aes(x = FILL_IN_THIS, y = FILL_IN_THIS)) +
+  filter(year == 1997) %>% 
+  mutate(life_level = case_when(lifeExp < 23 ~ "very low",
+                                lifeExp < 48 ~ "low",
+                                lifeExp < 59 ~ "moderate",
+                                lifeExp < 70 ~ "high",
+                                TRUE ~ "very high")) %>% 
+  ggplot() + geom_boxplot(aes(x = life_level, y = gdpPercap)) +
   labs(y = "GDP per capita, $", x= "Life expectancy level, years") +
   theme_bw() 
 ```
