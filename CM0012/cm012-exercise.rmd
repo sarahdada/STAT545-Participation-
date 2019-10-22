@@ -15,6 +15,7 @@ library(tidyverse)
 library(dplyr)
 library(forcats)
 library(ggplot2)
+library(plotly)
 ```
 
 ## Motivating the need for factors in R
@@ -139,7 +140,7 @@ What if we want to get rid of some levels that are "unused" - how do we do that?
 The function `droplevels()` operates on all the factors in a data frame or on a single factor. The function `forcats::fct_drop()` operates on a factor.
 
 ```{r}
-h_gap_dropped <- gap %>% 
+h_gap_dropped <- gapminder %>% 
   droplevels()
 
 h_gap_dropped$country %>%
