@@ -1,0 +1,94 @@
+---
+title: "cm007 Exercises: Practice with `dplyr`"
+output: 
+  html_document:
+    keep_md: true
+    theme: paper
+---
+
+<!---The following chunk allows errors when knitting--->
+
+```{r allow errors, echo = FALSE}
+knitr::opts_chunk$set(error = TRUE, warning = FALSE)
+```
+
+```{r}
+suppressPackageStartupMessages(library(tidyverse))
+suppressPackageStartupMessages(library(gapminder))
+suppressPackageStartupMessages(library(tsibble))
+```
+
+
+This worksheet contains exercises aimed for practice with `dplyr`. 
+
+
+1. (a) What's the minimum life expectancy for each continent and each year? (b) Add the corresponding country to the tibble, too. (c) Arrange by min life expectancy.
+
+```{r}
+gapminder %>% 
+  group_by(continent,year) %>% 
+  summarise(min_life = min(lifeExp),
+      country=country[lifeExp==min_life]) %>%
+    arrange(min_life)
+
+#cant put country=country, because it is the countries within that year.subset a vector in base r by opening up square brackets. it knew min_life. future can refere to newly created column. == vs =, different. naming it as it is making min life.
+
+```
+I wanna calculate , 
+
+2. Calculate the growth in population since the first year on record _for each country_ by rearranging the following lines, and filling in the `FILL_THIS_IN`. Here's another convenience function for you: `dplyr::first()`. 
+
+```
+
+
+ 
+
+ 
+```
+
+```{r}
+gapminder %>%
+  group_by(country) %>%
+  arrange(year) %>%
+  mutate(rel_growth = pop-first(pop)) %>% 
+  DT::datatable()
+```
+group_by or arrange works first. group by, and then arrange by year.
+mutate will rename on the fly i guess? dont need to make it a new rename
+
+3. Determine the country that experienced the sharpest 5-year drop in life expectancy, in each continent, sorted by the drop, by rearranging the following lines of code. Ensure there are no `NA`'s. Instead of using `lag()`, use the convenience function provided by the `tsibble` package, `tsibble::difference()`:
+
+```
+ 
+
+ 
+ 
+
+ 
+ 
+
+
+
+```
+first, tibble we want in there. we want drop by country WITH ENACH COUNTRY so group by. arrange- we want it ordered properly within groups, by year. mutate, calculate increase in life expectance. tsibble has difference. vercotr minus its lag. tsibble diff function does this. drop na gets rid of na
+ungrouping and regrouping by continent. regroup it based on continent, and Filtering will happen WITHIN EACH CHUNK. gapminder dataframe only has five year difference. ARRANGE FUNCTION IS INDEPENDENT OF GROUPS.
+```{r}
+gapminder %>% 
+  group_by(country) %>% 
+  arrange(year) %>%
+  mutate(inc_life_exp = difference(lifeExp)) %>%
+  drop_na() %>%
+  ungroup() %>%
+  group_by(continent) %>% 
+  filter(inc_life_exp == min(inc_life_exp)) %>%
+  arrange(year) %>%
+  knitr::kable()
+```
+```{r}
+Continentcount<-(gapminder %>% 
+  filter(year==2007) %>%
+  count(continent))
+```
+
+
+
