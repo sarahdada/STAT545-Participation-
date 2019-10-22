@@ -1,22 +1,21 @@
-#R Exploration - Lecture 2
-#Sept. 5th, 2019
+Lecture 2, r exploration
 
-#operations
+operations- 
 number * 2
 number <- 5 + 2
 number * 2
 a * 2
 
-#vectors
+vectors
 (times <-c(60, 40, 33, 15, 20, 55, 35))
 times / 60
 
-#functions
+functions
 mean(times)
 sqrt(times)
 range(times)
 
-#Logicals
+#Logical
 times < 30
 times == 20
 times != 20
@@ -43,7 +42,7 @@ times[8] <- NA
 times
 mean(times)
 
-#access documentation - args can be put in order or declared
+
 ?mean
 mean(times, na.rm = TRUE)
 
@@ -52,5 +51,5 @@ mtcars
 str(mtcars)
 names(mtcars)
 
-#extracting a column: dataframe $ column
+#extracting a column
 mtcars$mpg

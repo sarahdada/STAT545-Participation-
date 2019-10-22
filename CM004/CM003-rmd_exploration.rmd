@@ -1,5 +1,5 @@
 ---
-title: "Tibble Exploration"
+title: "tibble exploration"
 output: 
   html_document:
     toc: true
