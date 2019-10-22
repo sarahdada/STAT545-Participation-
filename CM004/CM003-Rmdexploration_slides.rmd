@@ -15,7 +15,7 @@ This is printing gapmider data set - i think renaming x
 x <- gapminder
 ```
 
-Convert mtcars to a tibble (wtf is a tibble?) and wrap in datatable:
+Convert mtcars to a tibble (tibble?) and wrap in datatable:
 ```{r}
 datatable(as_tibble(mtcars))
 ```
