@@ -90,17 +90,18 @@ Exercise:
 
 First, create a subset of the `gapminder` dataset containing only the country of `France
 ```{r}
-(gapminder_France <- FILL_THIS_IN
+(gapminder_France <- gapminder %>% 
+   filter(country=='France'))
 ```
 
 Now, using the `lm()` function we will create the linear model
 ```{r}
-(my_lm <- lm(FILL_THIS_IN))
+(my_lm <- lm(formula = lifeExp ~ year, gapminder_France))
 ```
 Does that mean that the life expectency at "year 0" was equal to -397.7646?!
 We are interested in the modeling results around the modeling period which starts at year 1952. To get a meaniningful "interpretable" intercept we can use the `I()` function.
 ```{r}
-(my_lm <- lm(FILL_THIS_IN))
+(my_lm <- lm(lifeExp ~ I(year-1952), data=gapminder_France))
 ```
 
 Use the `unclass()` function to take a look at how the `lm()` object actually looks like.
@@ -115,15 +116,17 @@ summary(my_lm)
 ```
 
 We can use the `predict()` function to make predictions from the model (default is to use fitting/training data). Here are the predictions:
-
+??gives fitted values
 ```{r}
-predict(my_lm) %>% 
+gapminder_France2 <- data.frame(year = seq(2000,2005))
+predict(my_lm, gapminder_France2) %>%
   head()
 ```
-Or we can predict on a new dataset:
+Or we can predict on a new dataset: -residuals
 ```{r}
-years1 = FILL_THIS_IN
-predict(my_lm,years1)
+sim1_resid <- augment(my_lm)
+ggplot(sim1_resid, aes(.resid)) +
+  geom_freqpoly(binwidth=0.5)
 ```
 
 
@@ -138,7 +141,7 @@ ggplot(gapminder, aes(gdpPercap, lifeExp)) +
 ```
 Lets consider another country "Zimbabwe", which has a unique behavior in the `lifeExp` and `year` relationship.
 ```{r}
-gapminder_Zimbabwe <- FILL_THIS_IN
+gapminder_Zimbabwe <- gapminder %>% filter(country=='Zimbabwe')
 gapminder_Zimbabwe %>% ggplot(aes(year, lifeExp)) + geom_point()
 ```
 Let's try fitting a linear model to this relationship
@@ -149,10 +152,13 @@ Now we will try to fit a second degree polynomial and see what would that look l
 ```{r}
 ggplot(FILL_THIS_IN) + geom_point()+geom_smooth(FILL_THIS_IN)
 ```
+Missed that ^^ yike
 
+chagning the graph to fit 2 degree poly
 ```{r}
-lm_linear <- lm(data = gapminder,formula = FILL_THIS_IN)
-lm_poly <- lm(data = gapminder,formula = FILL_THIS_IN))
+ggplot(gapminder_Zimbabwe, aes(year, lifeExp)) +
+  geom_point() +
+  geom_smooth(method = 'lm'??? (missed)formula = y ~ poly(I(x - 1952), degree = 2))
 ```
 `anova` lets you compare between different models.
 ```{r}
