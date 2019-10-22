@@ -1,5 +1,5 @@
 ---
-title: "Rmd Exploration Slides"
+title: "Rmd exploration slides"
 output: ioslides_presentation
 ---
 
@@ -10,12 +10,12 @@ library(DT)
 ```
 
 
-## Print out gapminder data:
+This is printing gapmider data set - i think renaming x
 ```{r}
 x <- gapminder
 ```
 
-Convert mtcars to a tibble and wrap in datatable:
+Convert mtcars to a tibble (wtf is a tibble?) and wrap in datatable:
 ```{r}
 datatable(as_tibble(mtcars))
 ```
